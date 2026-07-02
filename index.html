@@ -3,275 +3,393 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио | Системный администратор</title>
+    <title>ELLDII | IT Dashboard</title>
     <style>
-        /* Цветовые переменные для Дневной темы (Light Mode) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
         :root {
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --text-main: #1d1d1f;
-            --text-muted: #515154;
-            --accent: #0066cc;
-            --glass-bg: rgba(255, 255, 255, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.8);
-            --glass-shadow: rgba(0, 0, 0, 0.05);
-            --button-bg: rgba(0, 0, 0, 0.05);
-            --button-hover: rgba(0, 0, 0, 0.1);
+            /* Яркий фон для красивого эффекта матового стекла */
+            --bg-gradient: linear-gradient(135deg, #1e0b36 0%, #0d1b2a 40%, #1b263b 80%, #3e1f47 100%);
+            
+            /* Настройки стекла */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(20px);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            
+            --text-main: #ffffff;
+            --text-muted: #a0aab2;
+            --accent-blue: #00d2ff;
+            --accent-green: #00e676;
+            --accent-red: #ff5252;
         }
 
-        /* Цветовые переменные для Ночной темы (Dark Mode) */
-        [data-theme="dark"] {
-            --bg-gradient: linear-gradient(135deg, #141e30 0%, #243b55 100%);
-            --text-main: #f5f5f7;
-            --text-muted: #a1a1a6;
-            --accent: #2997ff;
-            --glass-bg: rgba(30, 30, 30, 0.5);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-shadow: rgba(0, 0, 0, 0.3);
-            --button-bg: rgba(255, 255, 255, 0.1);
-            --button-hover: rgba(255, 255, 255, 0.2);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            /* Шрифт в стиле Apple */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--bg-gradient);
-            background-attachment: fixed;
+            background-size: 200% 200%;
+            animation: gradientMove 15s ease infinite;
             color: var(--text-main);
-            line-height: 1.5;
-            margin: 0;
-            padding: 0;
-            transition: background 0.5s ease, color 0.5s ease;
-            min-height: 100vh;
-        }
-
-        /* Класс для эффекта стекла (Glassmorphism) */
-        .glass {
-            background: var(--glass-bg);
-            /* Эффект размытия фона под элементом */
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); 
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px var(--glass-shadow);
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        header {
+            height: 100vh;
+            overflow: hidden;
             display: flex;
-            justify-content: space-between;
+            padding: 15px;
+            gap: 15px;
+        }
+
+        /* Анимация фона */
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Общий класс для всех стеклянных панелей */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* --- ЛЕВЫЙ САЙДБАР --- */
+        .sidebar {
+            width: 260px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            display: flex;
             align-items: center;
-            padding: 20px 30px;
+            gap: 10px;
+            font-size: 1.5em;
+            font-weight: 700;
             margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border);
         }
 
-        .header-text h1 {
-            margin: 0;
-            font-size: 2em;
-            font-weight: 600;
-            letter-spacing: -0.5px;
+        .logo span {
+            color: var(--accent-blue);
         }
 
-        .header-text h2 {
-            margin: 5px 0 0 0;
-            font-size: 1.1em;
-            color: var(--text-muted);
-            font-weight: 400;
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        /* Кнопка переключения темы */
-        #theme-toggle {
-            background: var(--button-bg);
-            border: none;
-            color: var(--text-main);
-            padding: 10px 15px;
-            border-radius: 20px;
+        .nav-menu li {
+            padding: 12px 15px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
             font-weight: 500;
-            transition: background 0.3s ease;
+        }
+
+        .nav-menu li:hover, .nav-menu li.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        /* --- ОСНОВНОЙ КОНТЕЙНЕР --- */
+        .main-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow: hidden;
+        }
+
+        /* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
+        .topbar {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            flex-shrink: 0;
+        }
+
+        .status-indicators {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .indicator {
             display: flex;
             align-items: center;
             gap: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
         }
 
-        #theme-toggle:hover {
-            background: var(--button-hover);
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
         }
+        .dot.green { background-color: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+        .dot.blue { background-color: var(--accent-blue); box-shadow: 0 0 8px var(--accent-blue); }
 
-        .intro {
-            padding: 30px;
-            margin-bottom: 40px;
-            font-size: 1.1em;
-        }
-
-        h3.section-title {
-            margin-left: 10px;
-            font-size: 1.5em;
+        .top-controls button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
             font-weight: 600;
         }
 
-        .project-card {
+        .top-controls button:hover {
+            background: var(--accent-blue);
+            color: #000;
+        }
+
+        /* --- КОНТЕНТНАЯ ЧАСТЬ (Центр и Правый блок) --- */
+        .content-grid {
+            display: flex;
+            gap: 15px;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        /* Центральная панель */
+        .center-panel {
+            flex-grow: 1;
             padding: 30px;
+            overflow-y: auto;
+        }
+
+        .center-panel::-webkit-scrollbar { width: 6px; }
+        .center-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+        .section-header {
             margin-bottom: 25px;
         }
+        .section-header h2 { font-size: 1.8em; font-weight: 600; }
+        .section-header p { color: var(--text-muted); margin-top: 5px; }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px var(--glass-shadow);
+        /* Карточки проектов внутри центральной панели */
+        .project-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: 0.3s;
         }
-
-        .project-title {
-            margin-top: 0;
-            font-size: 1.3em;
-            font-weight: 600;
-        }
-
-        .tags {
-            font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-            color: var(--accent);
-            font-size: 0.85em;
-            margin-bottom: 15px;
+        .project-card:hover { background: rgba(255, 255, 255, 0.08); }
+        
+        .project-card h3 { margin-bottom: 10px; color: var(--accent-blue); }
+        .project-tags {
+            font-size: 0.75em;
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
             display: inline-block;
-            background: var(--button-bg);
-            padding: 5px 10px;
-            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .project-card ul { padding-left: 20px; color: #d1d5db; font-size: 0.9em; }
+        .project-card li { margin-bottom: 5px; }
+
+        /* Правая панель с виджетами */
+        .right-sidebar {
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-shrink: 0;
+            overflow-y: auto;
         }
 
-        ul {
-            padding-left: 20px;
+        .right-sidebar::-webkit-scrollbar { display: none; }
+
+        .widget {
+            padding: 20px;
+        }
+
+        .widget-title {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             color: var(--text-muted);
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
         }
 
-        li {
-            margin-bottom: 8px;
+        /* Строки в виджетах (статусы/навыки) */
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.9em;
         }
+        .stat-value { font-weight: 600; color: var(--accent-blue); }
+        .stat-value.green { color: var(--accent-green); }
 
-        .contact {
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-        }
-
-        a {
-            color: var(--accent);
+        /* Контакты */
+        .contact-link {
+            display: block;
+            color: #fff;
             text-decoration: none;
-            font-weight: 500;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid transparent;
         }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Адаптивность для мобильных устройств */
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
+        .contact-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent-blue);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <!-- Шапка -->
-        <header class="glass">
-            <div class="header-text">
-                <h1>[Имя Фамилия]</h1>
-                <h2>Системный администратор / Администратор веб-сервисов</h2>
+    <!-- ЛЕВЫЙ САЙДБАР -->
+    <aside class="sidebar glass-panel">
+        <div class="logo">
+            <span>⚡</span> ELLDII
+        </div>
+        <ul class="nav-menu">
+            <li class="active">📊 Dashboard</li>
+            <li>🌐 Сети & Маршрутизация</li>
+            <li>✈️ БПЛА Системы</li>
+            <li>🤖 IoT & Микроконтроллеры</li>
+            <li>💻 Веб-администрирование</li>
+        </ul>
+    </aside>
+
+    <div class="main-wrapper">
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+        <header class="topbar glass-panel">
+            <div class="status-indicators">
+                <div class="indicator"><div class="dot green"></div> SYS ADMIN ROLE</div>
+                <div class="indicator"><div class="dot blue"></div> WEB ADMIN ROLE</div>
+                <div class="indicator"><div class="dot green"></div> HARDWARE EXP: 100%</div>
             </div>
-            <button id="theme-toggle">🌙 Ночной режим</button>
+            <div class="top-controls">
+                <button>СКАЧАТЬ CV (PDF)</button>
+            </div>
         </header>
 
-        <!-- О себе -->
-        <div class="glass intro">
-            <p>Инженер с опытом построения нестандартных сетевых систем и разработки ПО для аппаратных комплексов. Умею настраивать сети (LAN, Wi-Fi маршрутизация, радиомосты), писать утилиты для администрирования оборудования и интегрировать устройства с веб-сервисами (REST API). Перехожу в классическое системное и веб-администрирование, чтобы применять навыки траблшутинга и понимание сетевого стека для поддержки IT-инфраструктуры.</p>
+        <div class="content-grid">
+            <!-- ЦЕНТРАЛЬНАЯ ПАНЕЛЬ -->
+            <main class="center-panel glass-panel">
+                <div class="section-header">
+                    <h2>Инфраструктурные & IT Проекты</h2>
+                    <p>Трансформация аппаратного опыта в системное администрирование</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>1. Low-latency сеть для Unitree Go2</h3>
+                    <div class="project-tags">TCP/IP | DHCP | Wi-Fi 802.11 | LAN | Routing</div>
+                    <ul>
+                        <li>Провел диагностику сети, выявил потерю пакетов и высокий пинг в беспроводном канале.</li>
+                        <li>Спроектировал и перевел систему управления роботом на проводное соединение (RJ45).</li>
+                        <li>Обеспечил минимальную задержку сети для потоковой передачи команд управления с сервера на клиент.</li>
+                    </ul>
+                </div>
+
+                <div class="project-card">
+                    <h3>2. Конфигуратор и радиомосты для БПЛА</h3>
+                    <div class="project-tags">Linux | RTOS | Radio Links | GUI/CLI | Admin Tool</div>
+                    <ul>
+                        <li>Откалибровал радиоканалы для телеметрии и удаленного мониторинга оборудования.</li>
+                        <li>Написал низкоуровневое ПО для полетного контроллера.</li>
+                        <li>Разработал конфигуратор (утилиту) для удаленного администрирования и диагностики системы.</li>
+                    </ul>
+                </div>
+
+                <div class="project-card">
+                    <h3>3. IoT-интеграция ESP32 с AI и Веб-сервисами</h3>
+                    <div class="project-tags">HTTP/HTTPS | REST API | JSON | Client-Server | DNS</div>
+                    <ul>
+                        <li>Настроил сетевой стек на микроконтроллере (Wi-Fi клиент, SSL/HTTPS подключение).</li>
+                        <li>Реализовал двусторонний обмен данными по REST API с облачными LLM-моделями.</li>
+                        <li>Обеспечил парсинг JSON-ответов для стабильной работы устройства.</li>
+                    </ul>
+                </div>
+
+                <div class="project-card">
+                    <h3>4. Модуль для электронного дневника</h3>
+                    <div class="project-tags">Web Admin | Databases | Deploy | Nginx/Apache</div>
+                    <ul>
+                        <li>Разработал логику интеграции нового модуля в существующую веб-платформу.</li>
+                        <li>Настроил связь модуля с базой данных и выполнил деплой (развертывание) на сервере.</li>
+                        <li>Обеспечил отказоустойчивость сервиса при пользовательских нагрузках.</li>
+                    </ul>
+                </div>
+            </main>
+
+            <!-- ПРАВАЯ ПАНЕЛЬ (Виджеты) -->
+            <aside class="right-sidebar">
+                
+                <div class="widget glass-panel">
+                    <div class="widget-title">Системная Диагностика (Стек)</div>
+                    <div class="stat-row">
+                        <span>Сетевая Маршрутизация</span>
+                        <span class="stat-value green">ОТЛИЧНО</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Linux / Администрирование</span>
+                        <span class="stat-value green">АКТИВНО</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Сборка & Hardware</span>
+                        <span class="stat-value">EXPERT</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>API & Интеграции</span>
+                        <span class="stat-value green">ОТЛИЧНО</span>
+                    </div>
+                </div>
+
+                <div class="widget glass-panel">
+                    <div class="widget-title">Профиль</div>
+                    <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5;">
+                        Инженер с сильным "железным" бэкграундом. Специализируюсь на траблшутинге, настройке сетей и интеграции оборудования с веб-инфраструктурой.
+                    </p>
+                </div>
+
+                <div class="widget glass-panel">
+                    <div class="widget-title">Связь (Connect)</div>
+                    <a href="https://t.me/ваш_ник" target="_blank" class="contact-link">Telegram: @username</a>
+                    <a href="mailto:ваша_почта@gmail.com" class="contact-link">email@example.com</a>
+                    <a href="#" class="contact-link">GitHub Профиль</a>
+                </div>
+
+            </aside>
         </div>
-
-        <h3 class="section-title">Технические проекты</h3>
-
-        <!-- Проект 1 -->
-        <div class="glass project-card">
-            <h3 class="project-title">1. Организация low-latency сети для управления платформой Unitree Go2</h3>
-            <span class="tags">TCP/IP, DHCP, Wi-Fi 802.11, LAN, Low-latency</span>
-            <p><strong>Задача:</strong> Обеспечить бесперебойную передачу потоковых команд управления между сервером (ПК) и клиентом (роботом).</p>
-            <ul>
-                <li>Настроил локальную сетевую инфраструктуру через Wi-Fi роутер.</li>
-                <li>Провел диагностику сети, выявил потерю пакетов и высокий пинг в беспроводном канале.</li>
-                <li>Спроектировал и перевел систему на проводное соединение (RJ45), обеспечив минимальную задержку сети и максимальную стабильность для передачи данных реального времени.</li>
-            </ul>
-        </div>
-
-        <!-- Проект 2 -->
-        <div class="glass project-card">
-            <h3 class="project-title">2. Разработка конфигуратора и настройка связи для БПЛА</h3>
-            <span class="tags">Радиоканалы, Linux/RTOS, GUI/CLI утилиты, Администрирование</span>
-            <p><strong>Задача:</strong> Настройка беспроводных мостов передачи данных и создание панели администрирования.</p>
-            <ul>
-                <li>Настроил и откалибровал радиоканалы для передачи телеметрии и удаленного мониторинга оборудования.</li>
-                <li>Написал ПО для полетного контроллера.</li>
-                <li>Разработал конфигуратор (утилиту) для удаленного администрирования, настройки параметров системы и диагностики.</li>
-            </ul>
-        </div>
-
-        <!-- Проект 3 -->
-        <div class="glass project-card">
-            <h3 class="project-title">3. Интеграция IoT-робота (ESP32) с веб-сервисами и AI</h3>
-            <span class="tags">HTTP/HTTPS, REST API, JSON, Клиент-сервер, DNS</span>
-            <p><strong>Задача:</strong> Организовать сетевой стек на микроконтроллере для общения с внешними веб-серверами.</p>
-            <ul>
-                <li>Настроил Wi-Fi клиент и безопасное подключение (SSL/HTTPS) к сети интернет.</li>
-                <li>Реализовал отправку и прием REST API запросов (GET/POST) к облачным моделям.</li>
-                <li>Настроил парсинг JSON-ответов для взаимодействия устройства с пользователем в реальном времени.</li>
-            </ul>
-        </div>
-
-        <!-- Проект 4 -->
-        <div class="glass project-card">
-            <h3 class="project-title">4. Разработка и деплой модуля для электронного дневника</h3>
-            <span class="tags">Веб-администрирование, Базы данных, Деплой, Интеграция</span>
-            <p><strong>Задача:</strong> Внедрение нового веб-модуля в существующую образовательную платформу.</p>
-            <ul>
-                <li>Разработал логику работы модуля и его связь с базой данных.</li>
-                <li>Выполнил деплой (развертывание) на сервере и интеграцию в основную архитектуру сайта.</li>
-                <li>Обеспечил корректную работу модуля при пользовательских нагрузках.</li>
-            </ul>
-        </div>
-
-        <!-- Контакты -->
-        <div class="glass contact">
-            <h3 class="project-title">Связь со мной</h3>
-            <p>Telegram: <a href="https://t.me/[ВашНик]" target="_blank">@[ВашНик]</a> &nbsp;|&nbsp; Телефон: [Ваш номер] &nbsp;|&nbsp; Email: [Ваша почта]</p>
-            <p><a href="[Ссылка на ваше резюме hh.ru или pdf]">Скачать резюме (PDF)</a></p>
-        </div>
-
     </div>
 
-    <!-- Скрипт для переключения темы -->
-    <script>
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        themeToggleBtn.addEventListener('click', () => {
-            // Проверяем текущую тему
-            if (body.getAttribute('data-theme') === 'dark') {
-                // Включаем светлую тему
-                body.removeAttribute('data-theme');
-                themeToggleBtn.innerHTML = '🌙 Ночной режим';
-            } else {
-                // Включаем темную тему
-                body.setAttribute('data-theme', 'dark');
-                themeToggleBtn.innerHTML = '☀️ Дневной режим';
-            }
-        });
-    </script>
 </body>
 </html>
