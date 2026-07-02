@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELLDII | IT Dashboard</title>
+    <title>Элдияр Мажинов | Портфолио</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         :root {
-            /* Яркий фон для красивого эффекта матового стекла */
             --bg-gradient: linear-gradient(135deg, #1e0b36 0%, #0d1b2a 40%, #1b263b 80%, #3e1f47 100%);
             
-            /* Настройки стекла */
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
             --glass-blur: blur(20px);
@@ -28,10 +26,10 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
             background: var(--bg-gradient);
             background-size: 200% 200%;
             animation: gradientMove 15s ease infinite;
@@ -39,18 +37,16 @@
             height: 100vh;
             overflow: hidden;
             display: flex;
-            padding: 15px;
-            gap: 15px;
+            padding: 30px;
+            gap: 30px;
         }
 
-        /* Анимация фона */
         @keyframes gradientMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Общий класс для всех стеклянных панелей */
         .glass-panel {
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
@@ -60,7 +56,6 @@
             box-shadow: var(--glass-shadow);
         }
 
-        /* --- ЛЕВЫЙ САЙДБАР --- */
         .sidebar {
             width: 260px;
             display: flex;
@@ -109,7 +104,6 @@
             border-left: 3px solid var(--accent-blue);
         }
 
-        /* --- ОСНОВНОЙ КОНТЕЙНЕР --- */
         .main-wrapper {
             flex-grow: 1;
             display: flex;
@@ -118,7 +112,6 @@
             overflow: hidden;
         }
 
-        /* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
         .topbar {
             height: 70px;
             display: flex;
@@ -151,6 +144,8 @@
         }
         .dot.green { background-color: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
         .dot.blue { background-color: var(--accent-blue); box-shadow: 0 0 8px var(--accent-blue); }
+        .dot.orange { background-color: #ff9800; box-shadow: 0 0 8px #ff9800; }
+        .dot.purple { background-color: #b142f5; box-shadow: 0 0 8px #b142f5; }
 
         .top-controls button {
             background: rgba(255, 255, 255, 0.1);
@@ -168,31 +163,30 @@
             color: #000;
         }
 
-        /* --- КОНТЕНТНАЯ ЧАСТЬ (Центр и Правый блок) --- */
         .content-grid {
             display: flex;
-            gap: 15px;
+            gap: 30px; 
             flex-grow: 1;
             overflow: hidden;
         }
 
-        /* Центральная панель */
         .center-panel {
             flex-grow: 1;
-            padding: 30px;
+            padding: 45px 50px; 
             overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
         .center-panel::-webkit-scrollbar { width: 6px; }
         .center-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
 
         .section-header {
-            margin-bottom: 25px;
+            margin-top: 0;
+            margin-bottom: 40px;
         }
         .section-header h2 { font-size: 1.8em; font-weight: 600; }
         .section-header p { color: var(--text-muted); margin-top: 5px; }
 
-        /* Карточки проектов внутри центральной панели */
         .project-card {
             background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--glass-border);
@@ -206,7 +200,6 @@
         .project-card h3 { margin-bottom: 10px; color: var(--accent-blue); }
         .project-tags {
             font-size: 0.75em;
-            font-family: monospace;
             background: rgba(255, 255, 255, 0.1);
             padding: 4px 8px;
             border-radius: 4px;
@@ -216,7 +209,6 @@
         .project-card ul { padding-left: 20px; color: #d1d5db; font-size: 0.9em; }
         .project-card li { margin-bottom: 5px; }
 
-        /* Правая панель с виджетами */
         .right-sidebar {
             width: 320px;
             display: flex;
@@ -242,7 +234,6 @@
             padding-bottom: 8px;
         }
 
-        /* Строки в виджетах (статусы/навыки) */
         .stat-row {
             display: flex;
             justify-content: space-between;
@@ -253,7 +244,6 @@
         .stat-value { font-weight: 600; color: var(--accent-blue); }
         .stat-value.green { color: var(--accent-green); }
 
-        /* Контакты */
         .contact-link {
             display: block;
             color: #fff;
@@ -270,87 +260,256 @@
             background: rgba(255,255,255,0.1);
             border-color: var(--accent-blue);
         }
+
+        body.light-mode {
+            --bg-gradient: linear-gradient(135deg, #e6e9f0 0%, #eef1f5 100%);
+            
+            --glass-bg: rgba(255, 255, 255, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            
+            --text-main: #1d1d1f;
+            --text-muted: #5a5a5c;
+            --accent-blue: #0066cc;
+        }
+
+        body.light-mode .project-card {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        body.light-mode .project-card:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        body.light-mode .indicator {
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        body.light-mode .nav-menu li:hover, 
+        body.light-mode .nav-menu li.active {
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--text-main);
+        }
+        body.light-mode .contact-link {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.5);
+        }
+        body.light-mode .contact-link:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+        body.light-mode .top-controls button {
+            color: var(--text-main);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        body.light-mode .top-controls button:hover {
+            background: var(--accent-blue);
+            color: #fff;
+        }
+        body.light-mode .project-card ul {
+            color: #333333;
+        }
+        body.light-mode .project-tags {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
     </style>
 </head>
-<body>
+<body class="light-mode">
 
-    <!-- ЛЕВЫЙ САЙДБАР -->
     <aside class="sidebar glass-panel">
         <div class="logo">
-            <span>⚡</span> ELLDII
+            <span>⚡</span> Элдияр Мажинов
         </div>
         <ul class="nav-menu">
-            <li class="active">📊 Dashboard</li>
-            <li>🌐 Сети & Маршрутизация</li>
-            <li>✈️ БПЛА Системы</li>
-            <li>🤖 IoT & Микроконтроллеры</li>
-            <li>💻 Веб-администрирование</li>
+            <li class="active"><a href="#top" style="color:inherit; text-decoration:none; display:flex; width:100%;">🏠 Главная</a></li>
+            <li><a href="#web-admin" style="color:inherit; text-decoration:none; display:flex; width:100%;">💻 Веб-администрирование</a></li>
+            <li><a href="#web-admin-monitoring" style="color:inherit; text-decoration:none; display:flex; width:100%;">💻 Мониторинг кредитов</a></li>
+            <li><a href="#network" style="color:inherit; text-decoration:none; display:flex; width:100%;">🌐 Сети & Маршрутизация</a></li>
+            <li><a href="#linux" style="color:inherit; text-decoration:none; display:flex; width:100%;">🐧 Linux & Системы (БПЛА)</a></li>
+            <li><a href="#iot" style="color:inherit; text-decoration:none; display:flex; width:100%;">🤖 IoT & API</a></li>
         </ul>
     </aside>
 
     <div class="main-wrapper">
-        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
         <header class="topbar glass-panel">
             <div class="status-indicators">
-                <div class="indicator"><div class="dot green"></div> SYS ADMIN ROLE</div>
-                <div class="indicator"><div class="dot blue"></div> WEB ADMIN ROLE</div>
-                <div class="indicator"><div class="dot green"></div> HARDWARE EXP: 100%</div>
+                <div class="indicator"><div class="dot green"></div> СИСТЕМНЫЙ АДМИНИСТРАТОР</div>
+                <div class="indicator"><div class="dot blue"></div> ВЕБ-АДМИНИСТРАТОР</div>
+                <div class="indicator"><div class="dot orange"></div> АППАРАТНЫЙ ОПЫТ</div>
             </div>
             <div class="top-controls">
-                <button>СКАЧАТЬ CV (PDF)</button>
+                <button id="themeToggle" style="margin-right: 10px;">☀️ День</button>
             </div>
         </header>
 
         <div class="content-grid">
-            <!-- ЦЕНТРАЛЬНАЯ ПАНЕЛЬ -->
             <main class="center-panel glass-panel">
-                <div class="section-header">
+                <div class="section-header" id="top">
                     <h2>Инфраструктурные & IT Проекты</h2>
                     <p>Трансформация аппаратного опыта в системное администрирование</p>
                 </div>
 
-                <div class="project-card">
-                    <h3>1. Low-latency сеть для Unitree Go2</h3>
-                    <div class="project-tags">TCP/IP | DHCP | Wi-Fi 802.11 | LAN | Routing</div>
-                    <ul>
-                        <li>Провел диагностику сети, выявил потерю пакетов и высокий пинг в беспроводном канале.</li>
-                        <li>Спроектировал и перевел систему управления роботом на проводное соединение (RJ45).</li>
-                        <li>Обеспечил минимальную задержку сети для потоковой передачи команд управления с сервера на клиент.</li>
-                    </ul>
+                <div class="project-card" id="web-admin">
+                    <h3>1. Разработка backend-модуля образовательной системы Э-күндөлүк</h3>
+                    <div class="project-tags">.NET 8 | PostgreSQL | EF Core | Angular | REST API | Оптимизация БД</div>
+                    
+                    <div style="margin-top: 20px;">
+                        <p style="margin-bottom: 15px;">
+                            <strong>Суть проекта:</strong> Разработка и развитие комплексного веб-модуля для профессиональных лицеев — от управления учебным процессом и автоматизации расписания до системы выставления оценок и интеграции с государственными сервисами.
+                        </p>
+
+                        <h4 style="margin: 20px 0 10px; font-size: 1.1em;">Архитектура и бизнес-логика:</h4>
+                        <ul style="margin-bottom: 20px;">
+                            <li><strong>Проектирование логики:</strong> Реализовал структуру образовательных программ, учебных групп и распределения нагрузки преподавателей с привязкой к предметам и расписанию.</li>
+                            <li><strong>Алгоритмы учебного процесса:</strong> Разработал систему понедельного планирования и генерации расписания с проверкой конфликтов (замены преподавателей) и защитой от случайной перезаписи.</li>
+                            <li><strong>Матрица оценивания:</strong> Внедрил единую модель хранения всех типов оценок (семестровые, годовые, гос. экзамены) с жестким разграничением прав доступа (учитель / завуч / директор) и учетом временных окон.</li>
+                            <li><strong>Оптимизация производительности:</strong> Устранил проблемы N+1. Внедрил пакетную загрузку, <code>AsNoTracking()</code>, in-memory проекции (Snapshot-DTO) и работу с Read-Replica для моментальной генерации тяжелых отчетов (журналы, ведомости).</li>
+                            <li><strong>API Интеграции:</strong> Настроил поэтапную, многопоточную выгрузку данных в государственный API (attestat.gov.kg) с использованием <code>Parallel.ForEachAsync</code>.</li>
+                        </ul>
+
+                        <h4 style="margin: 20px 0 10px; font-size: 1.1em;">Примененные навыки:</h4>
+                        <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 25px;">
+                            Проектирование сложных реляционных структур, оптимизация ORM и SQL-запросов под высокие нагрузки, разработка отказоустойчивых интеграций с внешними REST API, профилирование бизнес-логики.
+                        </p>
+                    </div>
+
+                    <div style="border-top: 1px solid rgba(128, 128, 128, 0.2); padding-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+                        
+                        <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(128, 128, 128, 0.2); background: rgba(0,0,0,0.05);">
+                            <img src="ekun.jpg" alt="Разработка Backend" style="width: 100%; height: auto; max-height: 400px; object-fit: cover; object-position: center; display: block;">
+                        </div>
+
+                        <a href="https://kundoluk.edu.gov.kg/account/login" target="_blank" style="display: inline-block; background: #24292e; color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; width: max-content; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); transition: transform 0.2s;">
+                            💻 Подробнее о проекте
+                        </a>
+                        
+                    </div>
                 </div>
 
-                <div class="project-card">
-                    <h3>2. Конфигуратор и радиомосты для БПЛА</h3>
-                    <div class="project-tags">Linux | RTOS | Radio Links | GUI/CLI | Admin Tool</div>
-                    <ul>
-                        <li>Откалибровал радиоканалы для телеметрии и удаленного мониторинга оборудования.</li>
-                        <li>Написал низкоуровневое ПО для полетного контроллера.</li>
-                        <li>Разработал конфигуратор (утилиту) для удаленного администрирования и диагностики системы.</li>
-                    </ul>
+                <div class="project-card" id="web-admin-monitoring">
+                    <h3>2. Система мониторинга выдачи государственных кредитов</h3>
+                    <div class="project-tags">ASP.NET Core | PostgreSQL | REST API | Nginx | Logging & Monitoring</div>
+                    
+                    <div style="margin-top: 20px;">
+                        <p style="margin-bottom: 15px;">
+                            <strong>Суть участия:</strong> Обеспечение отказоустойчивой работы серверной части и реализация модулей интеграции для государственной системы финансового мониторинга.
+                        </p>
+
+                        <h4 style="margin: 20px 0 10px; font-size: 1.1em;">Технические задачи:</h4>
+                        <ul style="margin-bottom: 20px;">
+                            <li><strong>Реализация API-компонентов:</strong> Разработал эндпоинты для обмена данными с банковскими API, обеспечив корректную сериализацию JSON-запросов и обработку ошибок на стороне бэкенда.</li>
+                            <li><strong>Серверное администрирование:</strong> Настроил окружение веб-сервера (Nginx/Kestrel), включая конфигурацию SSL-сертификатов, управление правами доступа и лимитами запросов.</li>
+                            <li><strong>Deployment (CI/CD процессы):</strong> Настроил процесс развертывания (деплой) приложения на production-серверах, включая накатку миграций базы данных PostgreSQL.</li>
+                            <li><strong>Логирование и мониторинг:</strong> Внедрил систему сбора и анализа системных логов. Использовал инструменты диагностики для выявления узких мест в производительности и оперативного устранения инцидентов.</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="border-top: 1px solid rgba(128, 128, 128, 0.2); padding-top: 20px;">
+                        <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(128, 128, 128, 0.2); background: rgba(0,0,0,0.05);">
+                            <img src="bank.jpg" alt="Система мониторинга" style="width: 100%; height: auto; max-height: 400px; object-fit: cover; display: block;">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="project-card">
-                    <h3>3. IoT-интеграция ESP32 с AI и Веб-сервисами</h3>
-                    <div class="project-tags">HTTP/HTTPS | REST API | JSON | Client-Server | DNS</div>
-                    <ul>
-                        <li>Настроил сетевой стек на микроконтроллере (Wi-Fi клиент, SSL/HTTPS подключение).</li>
-                        <li>Реализовал двусторонний обмен данными по REST API с облачными LLM-моделями.</li>
-                        <li>Обеспечил парсинг JSON-ответов для стабильной работы устройства.</li>
-                    </ul>
+                <div class="project-card" id="network">
+                    <h3>3. Организация low-latency сети для управления платформой Unitree Go2</h3>
+                    <div class="project-tags">TCP/IP | UDP | DHCP | LAN/WLAN | Диагностика сетей | RJ45</div>
+                    
+                    <div style="margin-top: 20px;">
+                        <p style="margin-bottom: 15px;">
+                            <strong>Суть проекта:</strong> Организация локальной сети и обеспечение отказоустойчивой, бесперебойной передачи пакетов данных между управляющим сервером (ПК) и клиентом (роботом Unitree Go2) для выполнения сложной хореографии в реальном времени.
+                        </p>
+
+                        <h4 style="margin: 20px 0 10px; font-size: 1.1em;">Этапы работ и Траблшутинг:</h4>
+                        <ul style="margin-bottom: 20px;">
+                            <li><strong>Базовая настройка:</strong> Развернул начальную сетевую инфраструктуру через Wi-Fi роутер (настройка DHCP, таблиц маршрутизации).</li>
+                            <li><strong>Анализ сети:</strong> Провел диагностику пропускной способности. Выявил, что для передачи потоковых данных (команд управления) стабильности Wi-Fi недостаточно из-за забитого радиоэфира — фиксировалась потеря пакетов и высокий пинг (jitter).</li>
+                            <li><strong>Реинжиниринг:</strong> Спроектировал новую топологию и перевел систему на прямое проводное соединение (кабель UTP, коннекторы RJ45), исключив беспроводной сегмент из критической цепи.</li>
+                            <li><strong>Оптимизация:</strong> Настроил передачу данных с учетом особенностей TCP/UDP, добившись минимальной задержки (low-latency) и максимальной скорости отклика оборудования.</li>
+                        </ul>
+
+                        <h4 style="margin: 20px 0 10px; font-size: 1.1em;">Примененные навыки:</h4>
+                        <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 25px;">
+                            Построение LAN, глубокое понимание пропускной способности каналов связи, траблшутинг сетевых задержек, работа на физическом уровне (Layer 1).
+                        </p>
+                    </div>
+
+                    <div style="border-top: 1px solid rgba(128, 128, 128, 0.2); padding-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+                        
+                        <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(128, 128, 128, 0.2);">
+                            <img src="go2.jpg" alt="Сетевое оборудование" style="width: 100%; height: auto; max-height: 350px; object-fit: cover; display: block;">
+                        </div>
+
+                        <a href="https://www.instagram.com/reel/DOAu2JQjSMJ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" style="display: inline-block; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; width: max-content; box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3); transition: transform 0.2s;">
+                            ▶️ Смотреть результат в Instagram
+                        </a>
+                        
+                    </div>
                 </div>
 
-                <div class="project-card">
-                    <h3>4. Модуль для электронного дневника</h3>
-                    <div class="project-tags">Web Admin | Databases | Deploy | Nginx/Apache</div>
-                    <ul>
-                        <li>Разработал логику интеграции нового модуля в существующую веб-платформу.</li>
-                        <li>Настроил связь модуля с базой данных и выполнил деплой (развертывание) на сервере.</li>
-                        <li>Обеспечил отказоустойчивость сервиса при пользовательских нагрузках.</li>
-                    </ul>
+                <div class="project-card" id="linux">
+                    <h3>4. Разработка панели администрирования (Конфигуратора) и радиомостов для БПЛА</h3>
+                    <div class="project-tags">Linux | RTOS | Radio Links | GUI/CLI | Утилиты администрирования</div>
+                    
+                    <div style="margin-top: 20px;">
+                        <p style="margin-bottom: 15px;">
+                            <strong>Суть проекта:</strong> Настройка отказоустойчивых беспроводных мостов передачи данных и разработка собственной утилиты (панели управления) для глубокого администрирования и удаленного мониторинга оборудования.
+                        </p>
+
+                        <h4 style="margin: 20px 0 10px; font-size: 1.1em;">Этапы работ и интеграция:</h4>
+                        <ul style="margin-bottom: 20px;">
+                            <li><strong>Удаленный мониторинг (Телеметрия):</strong> Настраивал и калибровал радиоканалы для непрерывной передачи данных. Обеспечил стабильную связь для получения метрик состояния системы в реальном времени.</li>
+                            <li><strong>Системное программирование:</strong> Написал микропрограммное обеспечение (прошивку) для контроллера управления, работая с операционными системами реального времени (RTOS) и архитектурой Linux на низком уровне.</li>
+                            <li><strong>Разработка инструмента администрирования:</strong> С нуля спроектировал и создал конфигуратор с графическим (GUI) и командным (CLI) интерфейсом. Инструмент позволяет удаленно менять параметры системы, проводить диагностику и управлять оборудованием.</li>
+                        </ul>
+
+                        <h4 style="margin: 20px 0 10px; font-size: 1.1em;">Примененные навыки:</h4>
+                        <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 25px;">
+                            Мониторинг распределенных систем, написание скриптов и полноценных утилит для автоматизации настройки, работа с удаленным доступом, профилирование параметров.
+                        </p>
+                    </div>
+
+                    <div style="border-top: 1px solid rgba(128, 128, 128, 0.2); padding-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+                        
+                        <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(128, 128, 128, 0.2); background: rgba(0,0,0,0.05);">
+                            <img src="conf.png" alt="Интерфейс конфигуратора" style="width: 100%; height: auto; max-height: 400px; object-fit: cover; object-position: top; display: block;">
+                        </div>  
+                        <a href="https://drive.google.com/file/d/1TrC9hnGFm2pJAQmNcpjPek6YowIQ1ZPC/view?usp=drivesdk" target="_blank" style="display: inline-block; background: linear-gradient(45deg, #4285F4 0%, #EA4335 50%, #FBBC05 100%); color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; width: max-content; box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.3); transition: transform 0.2s;">
+                            ▶️ Смотреть результат в Google Drive
+                        </a>                         
+                    </div>
+                </div>
+                <div class="project-card" id="iot">
+                    <h3>5. Интеграция IoT-устройства (ESP32) с веб-сервисами и AI через API</h3>
+                    <div class="project-tags">HTTP/HTTPS | REST API | JSON | Клиент-сервер | DNS | SSL/TLS</div>
+                    
+                    <div style="margin-top: 20px;">
+                        <p style="margin-bottom: 15px;">
+                            <strong>Суть проекта:</strong> Интеграция аппаратного IoT-устройства (на базе микроконтроллера) с современными веб-сервисами и облачными нейросетями посредством API для обеспечения интеллектуального взаимодействия с пользователем.
+                        </p>
+
+                        <h4 style="margin: 20px 0 10px; font-size: 1.1em;">Этапы работ и архитектура:</h4>
+                        <ul style="margin-bottom: 20px;">
+                            <li><strong>Сетевой стек:</strong> Организовал работу сетевого уровня на микроконтроллере, включая настройку Wi-Fi клиента и работу с DNS для резолвинга доменных имен облачных сервисов.</li>
+                            <li><strong>Безопасность (Security):</strong> Реализовал защищенное подключение к внешним веб-серверам, внедрив поддержку HTTPS и валидацию SSL-сертификатов на стороне клиента.</li>
+                            <li><strong>Интеграция по API:</strong> Настроил формирование, отправку и прием REST API запросов (методы GET и POST) к серверам облачных LLM-моделей (нейросетей).</li>
+                            <li><strong>Обработка данных:</strong> Разработал логику десериализации и парсинга JSON-ответов от сервера для извлечения полезной нагрузки и мгновенного отклика устройства.</li>
+                        </ul>
+
+                        <h4 style="margin: 20px 0 10px; font-size: 1.1em;">Примененные навыки:</h4>
+                        <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 25px;">
+                            Проектирование клиент-серверной архитектуры, работа со сторонними API, глубокое понимание веб-протоколов (HTTP/HTTPS) и структуры форматов обмена данными (JSON), настройка безопасных соединений (SSL/TLS).
+                        </p>
+                    </div>
+
+                    <div style="border-top: 1px solid rgba(128, 128, 128, 0.2); padding-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+                        
+                        <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(128, 128, 128, 0.2); background: rgba(0,0,0,0.05);">
+                            <img src="iot.JPG" alt="IoT интеграция ESP32" style="width: 100%; height: auto; max-height: 400px; object-fit: cover; object-position: center; display: block;">
+                        </div>                       
+                    </div>
                 </div>
             </main>
 
-            <!-- ПРАВАЯ ПАНЕЛЬ (Виджеты) -->
             <aside class="right-sidebar">
                 
                 <div class="widget glass-panel">
@@ -364,8 +523,8 @@
                         <span class="stat-value green">АКТИВНО</span>
                     </div>
                     <div class="stat-row">
-                        <span>Сборка & Hardware</span>
-                        <span class="stat-value">EXPERT</span>
+                        <span>Сборка & Оборудование</span>
+                        <span class="stat-value">ЭКСПЕРТ</span>
                     </div>
                     <div class="stat-row">
                         <span>API & Интеграции</span>
@@ -376,20 +535,36 @@
                 <div class="widget glass-panel">
                     <div class="widget-title">Профиль</div>
                     <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5;">
-                        Инженер с сильным "железным" бэкграундом. Специализируюсь на траблшутинге, настройке сетей и интеграции оборудования с веб-инфраструктурой.
+                        IT-специалист с практическим опытом работы с аппаратным обеспечением. Фокусируюсь на диагностике неисправностей, настройке сетей и интеграции оборудования с веб-сервисами.
                     </p>
                 </div>
 
                 <div class="widget glass-panel">
-                    <div class="widget-title">Связь (Connect)</div>
-                    <a href="https://t.me/ваш_ник" target="_blank" class="contact-link">Telegram: @username</a>
-                    <a href="mailto:ваша_почта@gmail.com" class="contact-link">email@example.com</a>
-                    <a href="#" class="contact-link">GitHub Профиль</a>
+                    <div class="widget-title">Контакты</div>
+                    <div style="padding: 10px; background: rgba(128, 128, 128, 0.1); border-radius: 8px; margin-bottom: 10px; text-align: center; font-weight: 500;">
+                        📞 +996 700 63 61 77
+                    </div>
+                    <div style="padding: 10px; background: rgba(128, 128, 128, 0.1); border-radius: 8px; text-align: center; font-weight: 500;">
+                        ✉️ mazhinov.ell@gmail.com
+                    </div>
                 </div>
 
             </aside>
         </div>
     </div>
 
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            
+            if (document.body.classList.contains('light-mode')) {
+                themeToggle.innerHTML = '🌙 Ночь';
+            } else {
+                themeToggle.innerHTML = '☀️ День';
+            }
+        });
+    </script>
 </body>
 </html>
