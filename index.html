@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио | Системный администратор</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #00ffcc;
+            --card-bg: #1e1e1e;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #0a0a0a;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+        }
+        h2 {
+            color: var(--accent-color);
+            font-weight: 400;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .intro {
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .project-title {
+            margin-top: 0;
+            color: #ffffff;
+        }
+        .tags {
+            font-family: monospace;
+            color: var(--accent-color);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .contact {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>[Имя Фамилия]</h1>
+        <h2>Системный администратор / Администратор веб-сервисов</h2>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <p>Инженер с опытом построения нестандартных сетевых систем и разработки ПО для аппаратных комплексов. Умею настраивать сети (LAN, Wi-Fi маршрутизация, радиомосты), писать утилиты для администрирования оборудования и интегрировать устройства с веб-сервисами (REST API). Перехожу в классическое системное и веб-администрирование, чтобы применять навыки траблшутинга и понимание сетевого стека для поддержки IT-инфраструктуры.</p>
+        </div>
+
+        <h3>Технические проекты (Инфраструктура и разработка)</h3>
+
+        <div class="project-card">
+            <h3 class="project-title">1. Организация low-latency сети для управления платформой Unitree Go2</h3>
+            <span class="tags">Стек: TCP/IP, DHCP, Wi-Fi 802.11, LAN маршрутизация, Low-latency</span>
+            <p><strong>Задача:</strong> Обеспечить бесперебойную передачу потоковых команд управления между сервером (ПК) и клиентом (роботом).</p>
+            <ul>
+                <li>Настроил локальную сетевую инфраструктуру через Wi-Fi роутер.</li>
+                <li>Провел диагностику сети, выявил потерю пакетов и высокий пинг в беспроводном канале.</li>
+                <li>Спроектировал и перевел систему на проводное соединение (RJ45), обеспечив минимальную задержку сети и максимальную стабильность для передачи данных реального времени.</li>
+            </ul>
+        </div>
+
+        <div class="project-card">
+            <h3 class="project-title">2. Разработка конфигуратора и настройка связи для БПЛА</h3>
+            <span class="tags">Стек: Радиоканалы, Linux/RTOS, GUI/CLI утилиты, Удаленное администрирование</span>
+            <p><strong>Задача:</strong> Настройка беспроводных мостов передачи данных и создание панели администрирования.</p>
+            <ul>
+                <li>Настроил и откалибровал радиоканалы для передачи телеметрии и удаленного мониторинга оборудования.</li>
+                <li>Написал ПО для полетного контроллера.</li>
+                <li>Разработал конфигуратор (утилиту) для удаленного администрирования, настройки параметров системы и диагностики.</li>
+            </ul>
+        </div>
+
+        <div class="project-card">
+            <h3 class="project-title">3. Интеграция IoT-робота (ESP32) с веб-сервисами и AI</h3>
+            <span class="tags">Стек: HTTP/HTTPS, REST API, JSON, клиент-серверная архитектура, DNS</span>
+            <p><strong>Задача:</strong> Организовать сетевой стек на микроконтроллере для общения с внешними веб-серверами.</p>
+            <ul>
+                <li>Настроил Wi-Fi клиент и безопасное подключение (SSL/HTTPS) к сети интернет.</li>
+                <li>Реализовал отправку и прием REST API запросов (GET/POST) к облачным моделям.</li>
+                <li>Настроил парсинг JSON-ответов для взаимодействия устройства с пользователем в реальном времени.</li>
+            </ul>
+        </div>
+
+        <div class="project-card">
+            <h3 class="project-title">4. Разработка и деплой модуля для электронного дневника</h3>
+            <span class="tags">Стек: Веб-администрирование, Базы данных, Деплой, Интеграция</span>
+            <p><strong>Задача:</strong> Внедрение нового веб-модуля в существующую образовательную платформу.</p>
+            <ul>
+                <li>Разработал логику работы модуля и его связь с базой данных.</li>
+                <li>Выполнил деплой (развертывание) на сервере и интеграцию в основную архитектуру сайта.</li>
+                <li>Обеспечил корректную работу модуля при пользовательских нагрузках.</li>
+            </ul>
+        </div>
+
+        <div class="contact">
+            <h3>Связь со мной:</h3>
+            <p>Telegram: <a href="https://t.me/[ВашНик]" target="_blank">@[ВашНик]</a> | Телефон: [Ваш номер] | Email: [Ваша почта]</p>
+            <p><a href="[Ссылка на ваше резюме hh.ru или pdf]">Скачать резюме (PDF)</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
