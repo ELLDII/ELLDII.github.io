@@ -1,3 +1,10 @@
+Вот готовый код вашего портфолио. Я переписал стили (CSS) и добавил немного JavaScript, чтобы реализовать **минималистичный дизайн в стиле Apple (Glassmorphism)** и переключатель светлой/темной темы.
+
+Эффект матового стекла (размытие фона) лучше всего смотрится поверх градиентов, поэтому на фоне задан плавный цветовой переход, который меняется при переключении темы.
+
+Скопируйте этот код и полностью замените им содержимое вашего файла `index.html`:
+
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -5,99 +12,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Портфолио | Системный администратор</title>
     <style>
+        /* Цветовые переменные для Дневной темы (Light Mode) */
         :root {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --accent-color: #00ffcc;
-            --card-bg: #1e1e1e;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --text-main: #1d1d1f;
+            --text-muted: #515154;
+            --accent: #0066cc;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: rgba(0, 0, 0, 0.05);
+            --button-bg: rgba(0, 0, 0, 0.05);
+            --button-hover: rgba(0, 0, 0, 0.1);
         }
+
+        /* Цветовые переменные для Ночной темы (Dark Mode) */
+        [data-theme="dark"] {
+            --bg-gradient: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+            --text-main: #f5f5f7;
+            --text-muted: #a1a1a6;
+            --accent: #2997ff;
+            --glass-bg: rgba(30, 30, 30, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: rgba(0, 0, 0, 0.3);
+            --button-bg: rgba(255, 255, 255, 0.1);
+            --button-hover: rgba(255, 255, 255, 0.2);
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            /* Шрифт в стиле Apple */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.5;
             margin: 0;
             padding: 0;
+            transition: background 0.5s ease, color 0.5s ease;
+            min-height: 100vh;
         }
-        header {
-            background-color: #0a0a0a;
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 2px solid var(--accent-color);
+
+        /* Класс для эффекта стекла (Glassmorphism) */
+        .glass {
+            background: var(--glass-bg);
+            /* Эффект размытия фона под элементом */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); 
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px var(--glass-shadow);
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-            color: #ffffff;
-        }
-        h2 {
-            color: var(--accent-color);
-            font-weight: 400;
-        }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
         }
-        .intro {
-            font-size: 1.1em;
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
             margin-bottom: 40px;
-            text-align: justify;
         }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .header-text h2 {
+            margin: 5px 0 0 0;
+            font-size: 1.1em;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Кнопка переключения темы */
+        #theme-toggle {
+            background: var(--button-bg);
+            border: none;
+            color: var(--text-main);
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #theme-toggle:hover {
+            background: var(--button-hover);
+        }
+
+        .intro {
+            padding: 30px;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        h3.section-title {
+            margin-left: 10px;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
         .project-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 20px;
+            padding: 30px;
             margin-bottom: 25px;
-            border-left: 4px solid var(--accent-color);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px var(--glass-shadow);
+        }
+
         .project-title {
             margin-top: 0;
-            color: #ffffff;
+            font-size: 1.3em;
+            font-weight: 600;
         }
+
         .tags {
-            font-family: monospace;
-            color: var(--accent-color);
-            font-size: 0.9em;
+            font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+            color: var(--accent);
+            font-size: 0.85em;
             margin-bottom: 15px;
-            display: block;
+            display: inline-block;
+            background: var(--button-bg);
+            padding: 5px 10px;
+            border-radius: 8px;
         }
+
         ul {
             padding-left: 20px;
+            color: var(--text-muted);
         }
+
+        li {
+            margin-bottom: 8px;
+        }
+
         .contact {
             text-align: center;
+            padding: 30px;
             margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
         }
+
         a {
-            color: var(--accent-color);
+            color: var(--accent);
             text-decoration: none;
+            font-weight: 500;
         }
+
         a:hover {
             text-decoration: underline;
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>[Имя Фамилия]</h1>
-        <h2>Системный администратор / Администратор веб-сервисов</h2>
-    </header>
-
     <div class="container">
-        <div class="intro">
+        
+        <!-- Шапка -->
+        <header class="glass">
+            <div class="header-text">
+                <h1>[Имя Фамилия]</h1>
+                <h2>Системный администратор / Администратор веб-сервисов</h2>
+            </div>
+            <button id="theme-toggle">🌙 Ночной режим</button>
+        </header>
+
+        <!-- О себе -->
+        <div class="glass intro">
             <p>Инженер с опытом построения нестандартных сетевых систем и разработки ПО для аппаратных комплексов. Умею настраивать сети (LAN, Wi-Fi маршрутизация, радиомосты), писать утилиты для администрирования оборудования и интегрировать устройства с веб-сервисами (REST API). Перехожу в классическое системное и веб-администрирование, чтобы применять навыки траблшутинга и понимание сетевого стека для поддержки IT-инфраструктуры.</p>
         </div>
 
-        <h3>Технические проекты (Инфраструктура и разработка)</h3>
+        <h3 class="section-title">Технические проекты</h3>
 
-        <div class="project-card">
+        <!-- Проект 1 -->
+        <div class="glass project-card">
             <h3 class="project-title">1. Организация low-latency сети для управления платформой Unitree Go2</h3>
-            <span class="tags">Стек: TCP/IP, DHCP, Wi-Fi 802.11, LAN маршрутизация, Low-latency</span>
+            <span class="tags">TCP/IP, DHCP, Wi-Fi 802.11, LAN, Low-latency</span>
             <p><strong>Задача:</strong> Обеспечить бесперебойную передачу потоковых команд управления между сервером (ПК) и клиентом (роботом).</p>
             <ul>
                 <li>Настроил локальную сетевую инфраструктуру через Wi-Fi роутер.</li>
@@ -106,9 +217,10 @@
             </ul>
         </div>
 
-        <div class="project-card">
+        <!-- Проект 2 -->
+        <div class="glass project-card">
             <h3 class="project-title">2. Разработка конфигуратора и настройка связи для БПЛА</h3>
-            <span class="tags">Стек: Радиоканалы, Linux/RTOS, GUI/CLI утилиты, Удаленное администрирование</span>
+            <span class="tags">Радиоканалы, Linux/RTOS, GUI/CLI утилиты, Администрирование</span>
             <p><strong>Задача:</strong> Настройка беспроводных мостов передачи данных и создание панели администрирования.</p>
             <ul>
                 <li>Настроил и откалибровал радиоканалы для передачи телеметрии и удаленного мониторинга оборудования.</li>
@@ -117,9 +229,10 @@
             </ul>
         </div>
 
-        <div class="project-card">
+        <!-- Проект 3 -->
+        <div class="glass project-card">
             <h3 class="project-title">3. Интеграция IoT-робота (ESP32) с веб-сервисами и AI</h3>
-            <span class="tags">Стек: HTTP/HTTPS, REST API, JSON, клиент-серверная архитектура, DNS</span>
+            <span class="tags">HTTP/HTTPS, REST API, JSON, Клиент-сервер, DNS</span>
             <p><strong>Задача:</strong> Организовать сетевой стек на микроконтроллере для общения с внешними веб-серверами.</p>
             <ul>
                 <li>Настроил Wi-Fi клиент и безопасное подключение (SSL/HTTPS) к сети интернет.</li>
@@ -128,9 +241,10 @@
             </ul>
         </div>
 
-        <div class="project-card">
+        <!-- Проект 4 -->
+        <div class="glass project-card">
             <h3 class="project-title">4. Разработка и деплой модуля для электронного дневника</h3>
-            <span class="tags">Стек: Веб-администрирование, Базы данных, Деплой, Интеграция</span>
+            <span class="tags">Веб-администрирование, Базы данных, Деплой, Интеграция</span>
             <p><strong>Задача:</strong> Внедрение нового веб-модуля в существующую образовательную платформу.</p>
             <ul>
                 <li>Разработал логику работы модуля и его связь с базой данных.</li>
@@ -139,12 +253,34 @@
             </ul>
         </div>
 
-        <div class="contact">
-            <h3>Связь со мной:</h3>
-            <p>Telegram: <a href="https://t.me/[ВашНик]" target="_blank">@[ВашНик]</a> | Телефон: [Ваш номер] | Email: [Ваша почта]</p>
+        <!-- Контакты -->
+        <div class="glass contact">
+            <h3 class="project-title">Связь со мной</h3>
+            <p>Telegram: <a href="https://t.me/[ВашНик]" target="_blank">@[ВашНик]</a> &nbsp;|&nbsp; Телефон: [Ваш номер] &nbsp;|&nbsp; Email: [Ваша почта]</p>
             <p><a href="[Ссылка на ваше резюме hh.ru или pdf]">Скачать резюме (PDF)</a></p>
         </div>
+
     </div>
 
+    <!-- Скрипт для переключения темы -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggleBtn.addEventListener('click', () => {
+            // Проверяем текущую тему
+            if (body.getAttribute('data-theme') === 'dark') {
+                // Включаем светлую тему
+                body.removeAttribute('data-theme');
+                themeToggleBtn.innerHTML = '🌙 Ночной режим';
+            } else {
+                // Включаем темную тему
+                body.setAttribute('data-theme', 'dark');
+                themeToggleBtn.innerHTML = '☀️ Дневной режим';
+            }
+        });
+    </script>
 </body>
 </html>
+
+```
