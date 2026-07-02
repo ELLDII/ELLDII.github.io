@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Элдияр Мажинов | Портфолио</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -310,6 +311,50 @@
         body.light-mode .project-tags {
             background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ТЕЛЕФОНОВ */
+        @media (max-width: 850px) {
+            body {
+                flex-direction: column;
+                height: auto;
+                overflow-y: auto;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .main-wrapper {
+                width: 100%;
+            }
+
+            .content-grid {
+                flex-direction: column;
+            }
+
+            .center-panel {
+                padding: 20px;
+            }
+
+            .right-sidebar {
+                width: 100%;
+                order: 2; /* Виджеты улетают вниз */
+            }
+
+            .topbar {
+                height: auto;
+                flex-direction: column;
+                padding: 15px;
+                gap: 10px;
+            }
+            
+            .project-card {
+                padding: 15px;
+            }
         }
     </style>
 </head>
