@@ -3,253 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Элдияр Мажинов | Портфолио</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Портфолио | Системный администратор</title>
+    <style>
+        /* Цветовые переменные для Дневной темы (Light Mode) */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --text-main: #1d1d1f;
+            --text-muted: #515154;
+            --accent: #0066cc;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: rgba(0, 0, 0, 0.05);
+            --button-bg: rgba(0, 0, 0, 0.05);
+            --button-hover: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Цветовые переменные для Ночной темы (Dark Mode) */
+        [data-theme="dark"] {
+            --bg-gradient: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+            --text-main: #f5f5f7;
+            --text-muted: #a1a1a6;
+            --accent: #2997ff;
+            --glass-bg: rgba(30, 30, 30, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: rgba(0, 0, 0, 0.3);
+            --button-bg: rgba(255, 255, 255, 0.1);
+            --button-hover: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            /* Шрифт в стиле Apple */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            transition: background 0.5s ease, color 0.5s ease;
+            min-height: 100vh;
+        }
+
+        /* Класс для эффекта стекла (Glassmorphism) */
+        .glass {
+            background: var(--glass-bg);
+            /* Эффект размытия фона под элементом */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); 
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px var(--glass-shadow);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            margin-bottom: 40px;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .header-text h2 {
+            margin: 5px 0 0 0;
+            font-size: 1.1em;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Кнопка переключения темы */
+        #theme-toggle {
+            background: var(--button-bg);
+            border: none;
+            color: var(--text-main);
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #theme-toggle:hover {
+            background: var(--button-hover);
+        }
+
+        .intro {
+            padding: 30px;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        h3.section-title {
+            margin-left: 10px;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .project-card {
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px var(--glass-shadow);
+        }
+
+        .project-title {
+            margin-top: 0;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .tags {
+            font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+            color: var(--accent);
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            display: inline-block;
+            background: var(--button-bg);
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .contact {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Hamburger button (mobile) -->
-    <button id="hamburger" class="hamburger" aria-label="Открыть меню">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
-    <!-- Overlay (mobile) -->
-    <div id="sidebarOverlay" class="sidebar-overlay"></div>
-
-    <div class="layout">
-
-        <!-- ── Sidebar ── -->
-        <aside id="sidebar" class="sidebar glass-panel">
-            <div class="logo">
-                Элдияр<br><span>Мажинов</span>
+    <div class="container">
+        
+        <!-- Шапка -->
+        <header class="glass">
+            <div class="header-text">
+                <h1>[Имя Фамилия]</h1>
+                <h2>Системный администратор / Администратор веб-сервисов</h2>
             </div>
-            <ul class="nav-menu">
-                <li class="active">
-                    <a href="#top">🏠 Главная</a>
-                </li>
-                <li>
-                    <a href="#web-admin">💻 Веб-администрирование</a>
-                </li>
-                <li>
-                    <a href="#web-admin-monitoring">📊 Мониторинг кредитов</a>
-                </li>
-                <li>
-                    <a href="#network">🌐 Сети &amp; Маршрутизация</a>
-                </li>
-                <li>
-                    <a href="#linux">🐧 Linux &amp; Системы (БПЛА)</a>
-                </li>
-                <li>
-                    <a href="#iot">🤖 IoT &amp; API</a>
-                </li>
+            <button id="theme-toggle">🌙 Ночной режим</button>
+        </header>
+
+        <!-- О себе -->
+        <div class="glass intro">
+            <p>Инженер с опытом построения нестандартных сетевых систем и разработки ПО для аппаратных комплексов. Умею настраивать сети (LAN, Wi-Fi маршрутизация, радиомосты), писать утилиты для администрирования оборудования и интегрировать устройства с веб-сервисами (REST API). Перехожу в классическое системное и веб-администрирование, чтобы применять навыки траблшутинга и понимание сетевого стека для поддержки IT-инфраструктуры.</p>
+        </div>
+
+        <h3 class="section-title">Технические проекты</h3>
+
+        <!-- Проект 1 -->
+        <div class="glass project-card">
+            <h3 class="project-title">1. Организация low-latency сети для управления платформой Unitree Go2</h3>
+            <span class="tags">TCP/IP, DHCP, Wi-Fi 802.11, LAN, Low-latency</span>
+            <p><strong>Задача:</strong> Обеспечить бесперебойную передачу потоковых команд управления между сервером (ПК) и клиентом (роботом).</p>
+            <ul>
+                <li>Настроил локальную сетевую инфраструктуру через Wi-Fi роутер.</li>
+                <li>Провел диагностику сети, выявил потерю пакетов и высокий пинг в беспроводном канале.</li>
+                <li>Спроектировал и перевел систему на проводное соединение (RJ45), обеспечив минимальную задержку сети и максимальную стабильность для передачи данных реального времени.</li>
             </ul>
-        </aside>
+        </div>
 
-        <!-- ── Main wrapper ── -->
-        <div class="main-wrapper">
+        <!-- Проект 2 -->
+        <div class="glass project-card">
+            <h3 class="project-title">2. Разработка конфигуратора и настройка связи для БПЛА</h3>
+            <span class="tags">Радиоканалы, Linux/RTOS, GUI/CLI утилиты, Администрирование</span>
+            <p><strong>Задача:</strong> Настройка беспроводных мостов передачи данных и создание панели администрирования.</p>
+            <ul>
+                <li>Настроил и откалибровал радиоканалы для передачи телеметрии и удаленного мониторинга оборудования.</li>
+                <li>Написал ПО для полетного контроллера.</li>
+                <li>Разработал конфигуратор (утилиту) для удаленного администрирования, настройки параметров системы и диагностики.</li>
+            </ul>
+        </div>
 
-            <!-- Topbar -->
-            <header class="topbar glass-panel">
-                <div class="status-indicators">
-                    <div class="indicator"><div class="dot green"></div> Системный администратор</div>
-                    <div class="indicator"><div class="dot blue"></div> Веб-администратор</div>
-                    <div class="indicator"><div class="dot orange"></div> Аппаратный опыт</div>
-                </div>
-                <div class="top-controls">
-                    <button id="themeToggle">🌙 Ночь</button>
-                </div>
-            </header>
+        <!-- Проект 3 -->
+        <div class="glass project-card">
+            <h3 class="project-title">3. Интеграция IoT-робота (ESP32) с веб-сервисами и AI</h3>
+            <span class="tags">HTTP/HTTPS, REST API, JSON, Клиент-сервер, DNS</span>
+            <p><strong>Задача:</strong> Организовать сетевой стек на микроконтроллере для общения с внешними веб-серверами.</p>
+            <ul>
+                <li>Настроил Wi-Fi клиент и безопасное подключение (SSL/HTTPS) к сети интернет.</li>
+                <li>Реализовал отправку и прием REST API запросов (GET/POST) к облачным моделям.</li>
+                <li>Настроил парсинг JSON-ответов для взаимодействия устройства с пользователем в реальном времени.</li>
+            </ul>
+        </div>
 
-            <!-- Content grid -->
-            <div class="content-grid">
+        <!-- Проект 4 -->
+        <div class="glass project-card">
+            <h3 class="project-title">4. Разработка и деплой модуля для электронного дневника</h3>
+            <span class="tags">Веб-администрирование, Базы данных, Деплой, Интеграция</span>
+            <p><strong>Задача:</strong> Внедрение нового веб-модуля в существующую образовательную платформу.</p>
+            <ul>
+                <li>Разработал логику работы модуля и его связь с базой данных.</li>
+                <li>Выполнил деплой (развертывание) на сервере и интеграцию в основную архитектуру сайта.</li>
+                <li>Обеспечил корректную работу модуля при пользовательских нагрузках.</li>
+            </ul>
+        </div>
 
-                <!-- Center panel -->
-                <main class="center-panel glass-panel">
+        <!-- Контакты -->
+        <div class="glass contact">
+            <h3 class="project-title">Связь со мной</h3>
+            <p>Telegram: <a href="https://t.me/[ВашНик]" target="_blank">@[ВашНик]</a> &nbsp;|&nbsp; Телефон: [Ваш номер] &nbsp;|&nbsp; Email: [Ваша почта]</p>
+            <p><a href="[Ссылка на ваше резюме hh.ru или pdf]">Скачать резюме (PDF)</a></p>
+        </div>
 
-                    <div class="section-header" id="top">
-                        <h2>Инфраструктурные &amp; IT Проекты</h2>
-                        <p>Трансформация аппаратного опыта в системное администрирование</p>
-                    </div>
+    </div>
 
-                    <!-- Project 1 -->
-                    <div class="project-card" id="web-admin">
-                        <h3>1. Разработка backend-модуля образовательной системы Э-күндөлүк</h3>
-                        <div class="project-tags">.NET 8 | PostgreSQL | EF Core | Angular | REST API | Оптимизация БД</div>
+    <!-- Скрипт для переключения темы -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
 
-                        <p><strong>Суть проекта:</strong> Разработка и развитие комплексного веб-модуля для профессиональных лицеев — от управления учебным процессом и автоматизации расписания до системы выставления оценок и интеграции с государственными сервисами.</p>
-
-                        <h4>Архитектура и бизнес-логика:</h4>
-                        <ul>
-                            <li><strong>Проектирование логики:</strong> Реализовал структуру образовательных программ, учебных групп и распределения нагрузки преподавателей с привязкой к предметам и расписанию.</li>
-                            <li><strong>Алгоритмы учебного процесса:</strong> Разработал систему понедельного планирования и генерации расписания с проверкой конфликтов (замены преподавателей) и защитой от случайной перезаписи.</li>
-                            <li><strong>Матрица оценивания:</strong> Внедрил единую модель хранения всех типов оценок (семестровые, годовые, гос. экзамены) с жестким разграничением прав доступа (учитель / завуч / директор) и учетом временных окон.</li>
-                            <li><strong>Оптимизация производительности:</strong> Устранил проблемы N+1. Внедрил пакетную загрузку, <code>AsNoTracking()</code>, in-memory проекции (Snapshot-DTO) и работу с Read-Replica для моментальной генерации тяжелых отчетов.</li>
-                            <li><strong>API Интеграции:</strong> Настроил поэтапную, многопоточную выгрузку данных в государственный API (attestat.gov.kg) с использованием <code>Parallel.ForEachAsync</code>.</li>
-                        </ul>
-
-                        <h4>Примененные навыки:</h4>
-                        <p>Проектирование сложных реляционных структур, оптимизация ORM и SQL-запросов под высокие нагрузки, разработка отказоустойчивых интеграций с внешними REST API, профилирование бизнес-логики.</p>
-
-                        <div class="card-footer">
-                            <div class="card-image">
-                                <img src="ekun.jpg" alt="Разработка Backend">
-                            </div>
-                            <a href="https://kundoluk.edu.gov.kg/account/login" target="_blank" rel="noopener" class="card-link github">
-                                💻 Подробнее о проекте
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-card" id="web-admin-monitoring">
-                        <h3>2. Система мониторинга выдачи государственных кредитов</h3>
-                        <div class="project-tags">ASP.NET Core | PostgreSQL | REST API | Nginx | Logging &amp; Monitoring</div>
-
-                        <p><strong>Суть участия:</strong> Обеспечение отказоустойчивой работы серверной части и реализация модулей интеграции для государственной системы финансового мониторинга.</p>
-
-                        <h4>Технические задачи:</h4>
-                        <ul>
-                            <li><strong>Реализация API-компонентов:</strong> Разработал эндпоинты для обмена данными с банковскими API, обеспечив корректную сериализацию JSON-запросов и обработку ошибок на стороне бэкенда.</li>
-                            <li><strong>Серверное администрирование:</strong> Настроил окружение веб-сервера (Nginx/Kestrel), включая конфигурацию SSL-сертификатов, управление правами доступа и лимитами запросов.</li>
-                            <li><strong>Deployment (CI/CD процессы):</strong> Настроил процесс развертывания приложения на production-серверах, включая накатку миграций базы данных PostgreSQL.</li>
-                            <li><strong>Логирование и мониторинг:</strong> Внедрил систему сбора и анализа системных логов. Использовал инструменты диагностики для выявления узких мест и оперативного устранения инцидентов.</li>
-                        </ul>
-
-                        <div class="card-footer">
-                            <div class="card-image">
-                                <img src="bank.jpg" alt="Система мониторинга">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 3 -->
-                    <div class="project-card" id="network">
-                        <h3>3. Организация low-latency сети для управления платформой Unitree Go2</h3>
-                        <div class="project-tags">TCP/IP | UDP | DHCP | LAN/WLAN | Диагностика сетей | RJ45</div>
-
-                        <p><strong>Суть проекта:</strong> Организация локальной сети и обеспечение отказоустойчивой, бесперебойной передачи пакетов данных между управляющим сервером (ПК) и клиентом (роботом Unitree Go2) для выполнения сложной хореографии в реальном времени.</p>
-
-                        <h4>Этапы работ и Траблшутинг:</h4>
-                        <ul>
-                            <li><strong>Базовая настройка:</strong> Развернул начальную сетевую инфраструктуру через Wi-Fi роутер (настройка DHCP, таблиц маршрутизации).</li>
-                            <li><strong>Анализ сети:</strong> Провел диагностику пропускной способности. Выявил, что для передачи потоковых данных стабильности Wi-Fi недостаточно из-за забитого радиоэфира — фиксировалась потеря пакетов и высокий пинг (jitter).</li>
-                            <li><strong>Реинжиниринг:</strong> Спроектировал новую топологию и перевел систему на прямое проводное соединение (кабель UTP, коннекторы RJ45), исключив беспроводной сегмент из критической цепи.</li>
-                            <li><strong>Оптимизация:</strong> Настроил передачу данных с учетом особенностей TCP/UDP, добившись минимальной задержки (low-latency) и максимальной скорости отклика оборудования.</li>
-                        </ul>
-
-                        <h4>Примененные навыки:</h4>
-                        <p>Построение LAN, глубокое понимание пропускной способности каналов связи, траблшутинг сетевых задержек, работа на физическом уровне (Layer 1).</p>
-
-                        <div class="card-footer">
-                            <div class="card-image">
-                                <img src="go2.jpg" alt="Сетевое оборудование">
-                            </div>
-                            <a href="https://www.instagram.com/reel/DOAu2JQjSMJ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="card-link instagram">
-                                ▶️ Смотреть результат в Instagram
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project 4 -->
-                    <div class="project-card" id="linux">
-                        <h3>4. Разработка панели администрирования (Конфигуратора) и радиомостов для БПЛА</h3>
-                        <div class="project-tags">Linux | RTOS | Radio Links | GUI/CLI | Утилиты администрирования</div>
-
-                        <p><strong>Суть проекта:</strong> Настройка отказоустойчивых беспроводных мостов передачи данных и разработка собственной утилиты (панели управления) для глубокого администрирования и удаленного мониторинга оборудования.</p>
-
-                        <h4>Этапы работ и интеграция:</h4>
-                        <ul>
-                            <li><strong>Удаленный мониторинг (Телеметрия):</strong> Настраивал и калибровал радиоканалы для непрерывной передачи данных. Обеспечил стабильную связь для получения метрик состояния системы в реальном времени.</li>
-                            <li><strong>Системное программирование:</strong> Написал микропрограммное обеспечение (прошивку) для контроллера управления, работая с операционными системами реального времени (RTOS) и архитектурой Linux на низком уровне.</li>
-                            <li><strong>Разработка инструмента администрирования:</strong> С нуля спроектировал и создал конфигуратор с графическим (GUI) и командным (CLI) интерфейсом. Инструмент позволяет удаленно менять параметры системы, проводить диагностику и управлять оборудованием.</li>
-                        </ul>
-
-                        <h4>Примененные навыки:</h4>
-                        <p>Мониторинг распределенных систем, написание скриптов и полноценных утилит для автоматизации настройки, работа с удаленным доступом, профилирование параметров.</p>
-
-                        <div class="card-footer">
-                            <div class="card-image">
-                                <img src="conf.png" alt="Интерфейс конфигуратора">
-                            </div>
-                            <a href="https://drive.google.com/file/d/1TrC9hnGFm2pJAQmNcpjPek6YowIQ1ZPC/view?usp=drivesdk" target="_blank" rel="noopener" class="card-link google">
-                                ▶️ Смотреть результат в Google Drive
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project 5 -->
-                    <div class="project-card" id="iot">
-                        <h3>5. Интеграция IoT-устройства (ESP32) с веб-сервисами и AI через API</h3>
-                        <div class="project-tags">HTTP/HTTPS | REST API | JSON | Клиент-сервер | DNS | SSL/TLS</div>
-
-                        <p><strong>Суть проекта:</strong> Интеграция аппаратного IoT-устройства (на базе микроконтроллера) с современными веб-сервисами и облачными нейросетями посредством API для обеспечения интеллектуального взаимодействия с пользователем.</p>
-
-                        <h4>Этапы работ и архитектура:</h4>
-                        <ul>
-                            <li><strong>Сетевой стек:</strong> Организовал работу сетевого уровня на микроконтроллере, включая настройку Wi-Fi клиента и работу с DNS для резолвинга доменных имен облачных сервисов.</li>
-                            <li><strong>Безопасность (Security):</strong> Реализовал защищенное подключение к внешним веб-серверам, внедрив поддержку HTTPS и валидацию SSL-сертификатов на стороне клиента.</li>
-                            <li><strong>Интеграция по API:</strong> Настроил формирование, отправку и прием REST API запросов (методы GET и POST) к серверам облачных LLM-моделей (нейросетей).</li>
-                            <li><strong>Обработка данных:</strong> Разработал логику десериализации и парсинга JSON-ответов от сервера для извлечения полезной нагрузки и мгновенного отклика устройства.</li>
-                        </ul>
-
-                        <h4>Примененные навыки:</h4>
-                        <p>Проектирование клиент-серверной архитектуры, работа со сторонними API, глубокое понимание веб-протоколов (HTTP/HTTPS) и структуры форматов обмена данными (JSON), настройка безопасных соединений (SSL/TLS).</p>
-
-                        <div class="card-footer">
-                            <div class="card-image">
-                                <img src="iot.JPG" alt="IoT интеграция ESP32">
-                            </div>
-                        </div>
-                    </div>
-
-                </main>
-
-                <!-- Right sidebar -->
-                <aside class="right-sidebar">
-
-                    <div class="widget glass-panel">
-                        <div class="widget-title">Системная Диагностика (Стек)</div>
-                        <div class="stat-row">
-                            <span>Сетевая Маршрутизация</span>
-                            <span class="stat-value green">ОТЛИЧНО</span>
-                        </div>
-                        <div class="stat-row">
-                            <span>Linux / Администрирование</span>
-                            <span class="stat-value green">АКТИВНО</span>
-                        </div>
-                        <div class="stat-row">
-                            <span>Сборка &amp; Оборудование</span>
-                            <span class="stat-value">ЭКСПЕРТ</span>
-                        </div>
-                        <div class="stat-row">
-                            <span>API &amp; Интеграции</span>
-                            <span class="stat-value green">ОТЛИЧНО</span>
-                        </div>
-                    </div>
-
-                    <div class="widget glass-panel">
-                        <div class="widget-title">Профиль</div>
-                        <p class="profile-text">
-                            IT-специалист с практическим опытом работы с аппаратным обеспечением. Фокусируюсь на диагностике неисправностей, настройке сетей и интеграции оборудования с веб-сервисами.
-                        </p>
-                    </div>
-
-                    <div class="widget glass-panel">
-                        <div class="widget-title">Контакты</div>
-                        <div class="contact-item">📞 +996 700 63 61 77</div>
-                        <div class="contact-item">✉️ mazhinov.ell@gmail.com</div>
-                    </div>
-
-                </aside>
-
-            </div><!-- /content-grid -->
-
-        </div><!-- /main-wrapper -->
-
-    </div><!-- /layout -->
-
-    <script src="script.js"></script>
+        themeToggleBtn.addEventListener('click', () => {
+            // Проверяем текущую тему
+            if (body.getAttribute('data-theme') === 'dark') {
+                // Включаем светлую тему
+                body.removeAttribute('data-theme');
+                themeToggleBtn.innerHTML = '🌙 Ночной режим';
+            } else {
+                // Включаем темную тему
+                body.setAttribute('data-theme', 'dark');
+                themeToggleBtn.innerHTML = '☀️ Дневной режим';
+            }
+        });
+    </script>
 </body>
 </html>
